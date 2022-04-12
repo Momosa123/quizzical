@@ -7,7 +7,8 @@ function App() {
   const [start, setStart] = React.useState(false);
   const [playAgain, setPlayAgain] = React.useState(false);
   const [questions, setQuestions] = React.useState([])
-  console.log("render")
+  // const [answers, setAnswers] = React.useState([])
+  // console.log("render")
   React.useEffect(() => {
     async function getMemes() {
         const res = await fetch("https://opentdb.com/api.php?amount=5")
@@ -16,13 +17,28 @@ function App() {
      
     }
     getMemes()
+
+
 }, [playAgain])
 
 
+
+const answerRest =[]
+
+
+console.log(answerRest)
+
 const questionElements = questions.map(
-  questionElement => <Quizz category = {questionElement.category} difficulty = {questionElement.difficulty} question ={questionElement.question} correctAnswer={questionElement.correct_answer} incorrectAnswers={questionElement.incorrect_answers}/>
+  questionElement => <Quizz 
+                            category = {questionElement.category} 
+                            difficulty = {questionElement.difficulty} 
+                            question ={questionElement.question} 
+                            correctAnswer={questionElement.correct_answer} 
+                            incorrectAnswers={questionElement.incorrect_answers}
+
+  />
   )
-console.log(questions)
+
 //   React.useEffect(function() {
 //     console.log("Effect ran")
 //     fetch("https://opentdb.com/api.php?amount=10")

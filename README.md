@@ -19,14 +19,3 @@ multiple choice answer (create an object containing all answer of a question wit
 
 if the choosen answer is correct display it in green and add 1 to the score
 
-:
-category: "History"
-correct_answer: "1808"
-difficulty: "hard"
-incorrect_answers: Array(3)
-0: "1806"
-1: "1810"
-2: "1809"
-length: 3
-[[Prototype]]: Array(0)
-question: "When did Spanish Peninsular War start?"

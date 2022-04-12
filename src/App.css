@@ -64,28 +64,34 @@ body {
 
 /* Styling the Qestion/Answer component */
 .question-component {
-  max-width: 40rem;
+  max-width: 60rem;
   margin: 0 auto;
-  margin-bottom: 1.5rem;
+  margin-top: 4rem;
   padding-bottom: 1.5rem;
   border-bottom: 2px solid #dbdef0;
 }
 
+.tags{
+  display: flex;
+  gap: 2.5rem;
+}
 .question {
-margin-top: 4rem;
+margin-top: 2rem;
   margin-bottom: 1.2rem;
   font-family: "Karla", sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
 
 }
-
+.selectClass{
+  background-color: #D6DBF5;
+}
 .choice-container{
   display: flex;
-  gap: 1.2rem;
+  gap: 1.7rem;
 }
 
-.choice{
+.choice, .tag{
   margin: 0;
   padding: 1rem;
   font-size: 1rem;
@@ -94,4 +100,16 @@ border: 1px solid #293264;
 ;
   border-radius: 8px;
 cursor: pointer;
+}
+
+.tag{
+  cursor: auto;
+}
+
+.category{
+  background-color: aquamarine;
+}
+
+.difficulty{
+  background-color: rgb(201, 37, 37);
 }
