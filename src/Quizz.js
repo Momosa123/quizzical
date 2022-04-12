@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Play(props) {
+export default function Quizz(props) {
   return (
     <div className="question-component">
       <h2 className="question">question</h2>
