@@ -7,6 +7,7 @@ function App() {
   const [start, setStart] = React.useState(false);
   const [playAgain, setPlayAgain] = React.useState(false);
   const [questions, setQuestions] = React.useState([])
+  const [checkAnswer, setCheckAnswer] = React.useState(false)
   // const [answers, setAnswers] = React.useState([])
   // console.log("render")
   React.useEffect(() => {
@@ -17,16 +18,16 @@ function App() {
      
     }
     getMemes()
-
+    setCheckAnswer(false)
 
 }, [playAgain])
 
 
 
-const answerRest =[]
 
 
-console.log(answerRest)
+
+console.log(checkAnswer)
 
 const questionElements = questions.map(
   questionElement => <Quizz 
@@ -35,23 +36,32 @@ const questionElements = questions.map(
                             question ={questionElement.question} 
                             correctAnswer={questionElement.correct_answer} 
                             incorrectAnswers={questionElement.incorrect_answers}
+                            check={checkAnswer}
 
   />
   )
 
-//   React.useEffect(function() {
-//     console.log("Effect ran")
-//     fetch("https://opentdb.com/api.php?amount=10")
-//         .then(res => res.json())
-//         .then(data => console.log(data.results))
-// }, [playAgain])
+
   function startGame() {
     setStart(true);
   }
+
+  function verifyAnswer(){
+    setCheckAnswer(oldValue => !oldValue)
+  }
+
+  function newGame (){
+    setPlayAgain(oldValue =>!oldValue)
+  }
+
   return (
-    <div className="App">
+    <div className="app">
       {!start && <Start handleClick={startGame} />}
       {start && questionElements}
+      {start && !checkAnswer && <button className="normal-button"  onClick={verifyAnswer}>Check Answers</button>}
+      {checkAnswer && <div className="replay-container">
+        <h2> You have X good answers</h2> <button   onClick={newGame}>Play Again</button>
+      </div>}
     </div>
   );
 }
