@@ -1,5 +1,5 @@
 import React from "react";
-
+import { decode } from "html-entities";
 export default function Answer(props){
   // const  [styles, setStyles] = React.useState("")
   
@@ -24,7 +24,7 @@ export default function Answer(props){
 // }
 
   return(
-    <p  className="choice">{props.answer}</p>
+    <p  className="choice">{decode(props.answer)}</p>
   
   )
 }

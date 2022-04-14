@@ -76,8 +76,8 @@ button:active {
 .question-component {
  
   margin-top: 4rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid #dbdef0;
+  
+  
 }
 
 .tags{
@@ -95,9 +95,11 @@ margin-top: 2rem;
 .selectClass{
   background-color: #D6DBF5;
 }
-.choice-container{
+.answer-container{
   display: flex;
   gap: 1.7rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #dbdef0;
 }
 
 .choice, .tag{
