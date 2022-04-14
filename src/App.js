@@ -6,7 +6,7 @@ import Quizz from "./Quizz";
 function App() {
   const [start, setStart] = React.useState(false);
   const [playAgain, setPlayAgain] = React.useState(false);
-  const [questions, setQuestions] = React.useState([])
+  const [quizz, setQuizz] = React.useState([])
   const [checkAnswer, setCheckAnswer] = React.useState(false)
   // const [answers, setAnswers] = React.useState([])
   // console.log("render")
@@ -14,7 +14,7 @@ function App() {
     async function getMemes() {
         const res = await fetch("https://opentdb.com/api.php?amount=5")
         const data = await res.json()
-       setQuestions(data.results)
+       setQuizz(data.results)
      
     }
     getMemes()
@@ -29,13 +29,13 @@ function App() {
 
 console.log(checkAnswer)
 
-const questionElements = questions.map(
-  questionElement => <Quizz 
-                            category = {questionElement.category} 
-                            difficulty = {questionElement.difficulty} 
-                            question ={questionElement.question} 
-                            correctAnswer={questionElement.correct_answer} 
-                            incorrectAnswers={questionElement.incorrect_answers}
+const quizzElements = quizz.map(
+  quizzElement => <Quizz 
+                            category = {quizzElement.category} 
+                            difficulty = {quizzElement.difficulty} 
+                            question ={quizzElement.question} 
+                            correctAnswer={quizzElement.correct_answer} 
+                            incorrectAnswers={quizzElement.incorrect_answers}
                             check={checkAnswer}
 
   />
@@ -57,7 +57,7 @@ const questionElements = questions.map(
   return (
     <div className="app">
       {!start && <Start handleClick={startGame} />}
-      {start && questionElements}
+      {start && quizzElements}
       {start && !checkAnswer && <button className="normal-button"  onClick={verifyAnswer}>Check Answers</button>}
       {checkAnswer && <div className="replay-container">
         <h2> You have X good answers</h2> <button   onClick={newGame}>Play Again</button>
