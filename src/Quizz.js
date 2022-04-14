@@ -43,16 +43,7 @@ allAnswers= shuffle(allAnswers)
       
   ,[props.check])
  
-    React.useEffect(
-    ()=>{
-  
-      setAnswers(oldAnswers => oldAnswers.map(answer => 
-           ( {...answer, click: false} )
-    ))
-   
-      }
-      
-  ,[props.check])
+
 
   React.useEffect(
     ()=>{
@@ -69,7 +60,7 @@ allAnswers= shuffle(allAnswers)
   ,[props.correctAnswer])
 
 function clickAnswer(id){
-  if (answers.some(answer=>answer.click))
+if(!props.check){  if (answers.some(answer=>answer.click))
   {  setAnswers(oldAnswers => oldAnswers.map(answer => {
       return answer.id === id ? 
           {...answer, click: answer.click===true? !answer.click: answer.click} :
@@ -80,13 +71,13 @@ function clickAnswer(id){
           {...answer, click: !answer.click} :
           answer
   }))
-  }
+  }}
   
 }
 
 
   const answerElement = answers.map(
-    answer => <Answer 
+    answer => <Answer again={props.again}
     check={props.check} isTrue={answer.truthness} 
     isClick={answer.click} answer={decode(answer.answer)} 
     clickAnswer={() =>{(clickAnswer(answer.id))}}  className="choice"
