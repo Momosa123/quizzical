@@ -4,7 +4,7 @@ import Start from "./Start";
 import Question from "./Question";
 import Answers from "./Answers";
 import { nanoid } from "nanoid";
-import {decode} from 'html-entities';
+
 
 
 // -> '&copy;'
@@ -14,8 +14,6 @@ function App() {
   const [start, setStart] = React.useState(false);
   const [playAgain, setPlayAgain] = React.useState(false);
   const [quizz, setQuizz] = React.useState([])
-  const [questions, setQuestions] = React.useState([])
-  const [answers, setAnswers] = React.useState([])
   const [checkAnswer, setCheckAnswer] = React.useState(false)
   // const [answers, setAnswers] = React.useState([])
   // console.log("render")
@@ -44,10 +42,10 @@ function App() {
       )
      
       )
-      setAnswers(quizz.map(
-        question => {return({...question.answers, question.id})}))
+      // setAnswers(quizz.map(
+      //   question => {return([...question.answers, question.id])}))
 
-      setQuestions(quizz.map(question =>question.question))
+      // setQuestions(quizz.map(question =>question.question))
       // setAnswers(data.results.map(
       //   quizz=> {const answers =[...quizz.incorrect_answers,quizz.correct_answer]
       //   return answers.map(answer =>({
@@ -58,6 +56,9 @@ function App() {
       //   }))
       //   }
       // ))
+      // setQuestions(data.results.map(
+      //   quizz=> quizz.question
+      // ))
       
     }
     
@@ -65,8 +66,7 @@ function App() {
     setCheckAnswer(false)
 
 }, [playAgain])
-console.log(questions)
-console.log(answers)
+
 
 function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
@@ -86,25 +86,20 @@ function shuffle(array) {
   return array;
 }
  
-function changeClick(questionId, answerId){
+// function changeClick(questionId, answerId){
   
-    setQuestions(oldQuestions => oldQuestions.map(question => {
-      return question.id === questionId ? 
-          {...question, answers: question.answers.map(
-            answer => {return answer.id === answerId ? {
-              ...answer, isSelected:true
-            }:answer}
-          )} :
-          question
-  }))
+//     setQuizz(oldQuizz => oldQuizz.map(quizz => {
+//       return quizz.id === questionId ? 
+//           {...quizz, answers: quizz.answers.map(
+//             answer => {return answer.id === answerId ? {
+//               ...answer, isSelected:true
+//             }:answer}
+//           )} :
+//           quizz
+//   }))
   
-}
+// }
 
-const answerElements = answers.map(
-  answer => return ({for(let i =0; i< answer.length; i++){
-     <Answer answer= {answer[i]}/>
-  }})
-)
 
 
 const quizzElements = quizz.map(
@@ -115,20 +110,20 @@ const quizzElements = quizz.map(
       difficulty={quizzElement.difficulty}
      
        />
-        {/* <Answers 
+        <Answers 
        
         answers={quizzElement.answers}
         click={quizzElement.click}
         check={checkAnswer}
-        handleClick={()=>{changeClick(quizzElement.id,quizzElement.answers.id)}}
-         /> */}
+        // handleClick={()=>{changeClick(quizzElement.id,quizzElement.answers.id)}
+        
+         />
          
          </div>
     )
       
   }
   )
-
 
 
   function startGame() {
@@ -147,6 +142,7 @@ const quizzElements = quizz.map(
     <div className="app">
       { !start && <Start handleClick={startGame} />}
       { start && quizzElements}
+  
 
     </div>
   );
