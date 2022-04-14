@@ -8,6 +8,7 @@ function App() {
   const [playAgain, setPlayAgain] = React.useState(false);
   const [quizz, setQuizz] = React.useState([])
   const [checkAnswer, setCheckAnswer] = React.useState(false)
+  const [count, setCount]=React.useState(0)
   // const [answers, setAnswers] = React.useState([])
   // console.log("render")
   React.useEffect(() => {
@@ -27,7 +28,7 @@ function App() {
 
 
 
-console.log(checkAnswer)
+// console.log(checkAnswer)
 
 const quizzElements = quizz.map(
   quizzElement => <Quizz 
@@ -37,6 +38,9 @@ const quizzElements = quizz.map(
                             correctAnswer={quizzElement.correct_answer} 
                             incorrectAnswers={quizzElement.incorrect_answers}
                             check={checkAnswer}
+                            again={playAgain}
+                            count={count}
+                            setCount={setCount}
 
   />
   )
@@ -60,7 +64,7 @@ const quizzElements = quizz.map(
       {start && quizzElements}
       {start && !checkAnswer && <button className="normal-button"  onClick={verifyAnswer}>Check Answers</button>}
       {checkAnswer && <div className="replay-container">
-        <h2> You have X good answers</h2> <button   onClick={newGame}>Play Again</button>
+        <h2> You have {count} good answers</h2> <button   onClick={newGame}>Play Again</button>
       </div>}
     </div>
   );

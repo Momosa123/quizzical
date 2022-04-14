@@ -18,7 +18,7 @@ export default function Answer(props){
       setStyles ("#94D7A2")
      }
        })
-console.log(props.answer,props.isClick,props.check, props.isTrue)
+// console.log(props.answer,props.isClick,props.check, props.isTrue)
   const clickedStyle = {
     backgroundColor: styles
 }
