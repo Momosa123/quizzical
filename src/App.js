@@ -9,8 +9,7 @@ function App() {
   const [quizz, setQuizz] = React.useState([])
   const [checkAnswer, setCheckAnswer] = React.useState(false)
   const [count, setCount]=React.useState(0)
-  // const [answers, setAnswers] = React.useState([])
-  // console.log("render")
+
   React.useEffect(() => {
     async function getMemes() {
         const res = await fetch("https://opentdb.com/api.php?amount=5")
@@ -24,11 +23,6 @@ function App() {
 }, [playAgain])
 
 
-
-
-
-
-// console.log(checkAnswer)
 
 const quizzElements = quizz.map(
   quizzElement => <Quizz 

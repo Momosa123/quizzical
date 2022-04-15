@@ -117,6 +117,7 @@ cursor: pointer;
 
 .category{
   background-color: aquamarine;
+  border: none;
 }
 
 .difficulty{

@@ -2,7 +2,9 @@ import { nanoid } from "nanoid";
 import React from "react";
 import Answer from "./Answer";
 import {decode} from 'html-entities';
+import { click } from "@testing-library/user-event/dist/click";
 export default function Quizz(props) {
+  // Remake answers into object that includes click, id and truthness
   let allAnswers =[...props.incorrectAnswers, props.correctAnswer]
 
 allAnswers= shuffle(allAnswers)
@@ -16,11 +18,17 @@ allAnswers= shuffle(allAnswers)
       }
     ))
   )
-
-  const  [styles, setStyles] = React.useState({
+// give some stylesCategory to category
+  const  [stylesCategory, setstylesCategory] = React.useState({
     backgroundColor: "aquamarine"
    
   })
+
+  const  [stylesDifficulty, setstylesDifficulty] = React.useState({
+    backgroundColor: "aquamarine"
+   
+  })
+  // shuffle the answers array to randomize the good answer
  function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
 
@@ -38,17 +46,17 @@ allAnswers= shuffle(allAnswers)
 
   return array;
 }
-  
+  // count the number of good answers
   React.useEffect(
     ()=>{
-      answers.forEach(answer => { if(answer.click && answer.truthness)  {props.setCount(oldCount => oldCount+1)}})
-     
-        
+      answers.forEach(answer => { 
+        if(answer.click && answer.truthness)  
+        {props.setCount(oldCount => oldCount+1)}}) 
       }
       
   ,[props.check])
  
-
+// update the answers on each api fetch
 
   React.useEffect(
     ()=>{
@@ -64,6 +72,7 @@ allAnswers= shuffle(allAnswers)
    
   ,[props.correctAnswer])
 
+  // change the state of the clicked answer
 function clickAnswer(id){
 if(!props.check){  
     setAnswers(oldAnswers => oldAnswers.map(answer => {
@@ -74,130 +83,128 @@ if(!props.check){
   
 }
 
-
-  const answerElement = answers.map(
-    answer => <Answer again={props.again}
-    check={props.check} isTrue={answer.truthness} 
-    isClick={answer.click} answer={decode(answer.answer)} 
-    clickAnswer={() =>{(clickAnswer(answer.id))}}  className="choice"
-    />
-  )
-
-  
+// edit the style of categories
+    
  React.useEffect(
    ()=>{
     if(props.category ==='Entertainment: Video Games'){
         
-      setStyles({
+      setstylesCategory({
         backgroundColor: "#eb1cb7",
-      
-    
-      }
-    
+      }  
     )}
   
-     if(props.category ==='Geography'){
+     else if(props.category ==='Geography'){
         
-      setStyles({
+      setstylesCategory({
         backgroundColor: "#f5a442",
-        border: "none",
-       
-      }
-    
+        border: "none",  
+      } 
     )}
 
  
       else if(props.category ==='Animals'){
-        setStyles({
+        setstylesCategory({
           backgroundColor: "#1fb807",
-          border: "none",
-          
+          border: "none",      
         }
-        
-      
       )}
 
       else if(props.category ==='Entertainment: Japanese Anime & Manga'){
-        setStyles({
+        setstylesCategory({
           backgroundColor: "#8f07b8",
           border: "none",
-          color:"#fff"
-          
+          color:"#fff"    
         }
-        
-      
       )}
 
       else if(props.category ==='Entertainment: Music'){
-        setStyles({
+        setstylesCategory({
           backgroundColor: "#b80730",
           border: "none",
-          color:"#fff"
-          
+          color:"#fff"    
         }
-        
-      
       )}
 
       else if(props.category ==='General Knowledge'){
-        setStyles({
+        setstylesCategory({
           backgroundColor: "#1cebe0",
-          border: "none",
-        
-          
+          border: "none",  
         }
-        
-      
       )}
 
       else if(props.category ==='History'){
-        setStyles({
+        setstylesCategory({
           backgroundColor: "#f5f242",
-          border: "none",
-      
-          
+          border: "none",    
         }
-        
-      
       )}
 
       else if(props.category ==='Entertainment: Comics'){
-        setStyles({
+        setstylesCategory({
           backgroundColor: "#761ceb",
           border: "none",
-          color:"#fff"
-      
-          
+          color:"#fff"          
         }
-        
-      
       )}
 
       else if(props.category ==='Sports'){
-        setStyles({
+        setstylesCategory({
           backgroundColor: "#1ceb98",
-          border: "none",
-         
-      
-          
-        }
+          border: "none",}
+        )}
+      })
+
+      React.useEffect(
+        ()=>{
         
+          if(props.difficulty ==='easy'){
+             
+           setstylesDifficulty({
+             backgroundColor: "#55a832",
+             border: "none",  
+           } 
+         )}
+     
       
-      )}
-      
+           else if(props.difficulty ==='medium'){
+             setstylesDifficulty({
+               backgroundColor: "#f7f723",
+               border: "none",      
+             }
+           )}
+     
+           else if(props.difficulty ==='hard'){
+             setstylesDifficulty({
+               backgroundColor: "#f72323",
+               border: "none",
+               color:"#fff"    
+             }
+           )}
+     
+        
   
-       })
+           })
+     
+
+       const answerElement = answers.map(
+        answer => <Answer again={props.again}
+        check={props.check} isTrue={answer.truthness} 
+        isClick={answer.click} answer={decode(answer.answer)} 
+        clickAnswer={() =>{(clickAnswer(answer.id))}}  className="choice"
+        />
+      )
 
   return (
     <div className="question-component">
     <div className="tags">
-      <h3 style ={styles} className="tag category">{decode(props.category)}</h3>
-      <h3 className="tag difficulty">{decode(props.difficulty)}</h3>
+      <h3 style ={stylesCategory} className="tag category">{decode(props.category)}</h3>
+      <h3 style={stylesDifficulty} className="tag difficulty">{decode(props.difficulty)}</h3>
     </div>
       <h2 className="question">{decode(props.question)}</h2>
       <div className="choice-container">
      {answerElement}
-   {/* {console.log(answers)} */}
+   
       </div>
       
     </div>
