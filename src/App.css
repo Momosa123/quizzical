@@ -17,6 +17,10 @@ body {
   height: 100%;
   font-family: "Inter", sans-serif;
   color: #293264;
+  background-image: url('./blob-scene-haikei.png');
+  background-position: center;
+  
+  background-size: cover;
 }
 
 /* Styling the start page */
@@ -117,6 +121,7 @@ cursor: pointer;
 
 .category{
   background-color: aquamarine;
+  border: none;
 }
 
 .difficulty{
