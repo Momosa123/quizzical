@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import React from "react";
 import Answer from "./Answer";
 import {decode} from 'html-entities';
-import { click } from "@testing-library/user-event/dist/click";
+
 export default function Quizz(props) {
   // Remake answers into object that includes click, id and truthness
   let allAnswers =[...props.incorrectAnswers, props.correctAnswer]
@@ -51,7 +51,7 @@ allAnswers= shuffle(allAnswers)
     ()=>{
       answers.forEach(answer => { 
         if(answer.click && answer.truthness)  
-        {props.setCount(oldCount => oldCount+1)}}) 
+        {props.setScore(oldScore => oldScore+1)}}) 
       }
       
   ,[props.check])
@@ -68,7 +68,7 @@ allAnswers= shuffle(allAnswers)
           truthness: answer === props.correctAnswer ? true : false
         }
       )))
-      props.setCount(0) }
+      props.setScore(0) }
    
   ,[props.correctAnswer])
 
@@ -91,6 +91,7 @@ if(!props.check){
         
       setstylesCategory({
         backgroundColor: "#eb1cb7",
+        color:"#fff" 
       }  
     )}
   
@@ -153,7 +154,7 @@ if(!props.check){
           backgroundColor: "#1ceb98",
           border: "none",}
         )}
-      })
+      },[props.again])
 
       React.useEffect(
         ()=>{
@@ -184,11 +185,11 @@ if(!props.check){
      
         
   
-           })
+           },[props.again])
      
 
        const answerElement = answers.map(
-        answer => <Answer again={props.again}
+        answer => <Answer 
         check={props.check} isTrue={answer.truthness} 
         isClick={answer.click} answer={decode(answer.answer)} 
         clickAnswer={() =>{(clickAnswer(answer.id))}}  className="choice"
