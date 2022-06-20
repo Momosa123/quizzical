@@ -21,13 +21,13 @@ function App() {
 
   //fetch the data on page load and each time the player wants to play again
   React.useEffect(() => {
-    async function getMemes() {
+    async function getQuizz() {
         const res = await fetch("https://opentdb.com/api.php?amount=5")
         const data = await res.json()
        setQuizz(data.results)
      
     }
-    getMemes()
+    getQuizz()
     setCheckAnswer(false)
 
 }, [playAgain])
