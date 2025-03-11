@@ -1,16 +1,17 @@
 # Guide de Migration vers Next.js et TypeScript
 
 ## Vue d'ensemble
-Ce document sert de feuille de route pour migrer votre projet Quizzical de React vers Next.js avec TypeScript. Suivez ces étapes progressivement pour une transition en douceur.
+Ce document sert de feuille de route pour migrer votre projet Quizzical de React vers Next.js avec TypeScript et Tailwind CSS. Suivez ces étapes progressivement pour une transition en douceur.
 
 ## Table des matières
 - [Étape 1: Préparation et sauvegarde](#étape-1-préparation-et-sauvegarde)
 - [Étape 2: Installation de Next.js](#étape-2-installation-de-nextjs)
 - [Étape 3: Ajout de TypeScript](#étape-3-ajout-de-typescript)
-- [Étape 4: Restructuration du projet](#étape-4-restructuration-du-projet)
-- [Étape 5: Migration des fonctionnalités](#étape-5-migration-des-fonctionnalités)
-- [Étape 6: Conversion progressive à TypeScript](#étape-6-conversion-progressive-à-typescript)
-- [Étape 7: Tests et déploiement](#étape-7-tests-et-déploiement)
+- [Étape 4: Installation de Tailwind CSS](#étape-4-installation-de-tailwind-css)
+- [Étape 5: Restructuration du projet](#étape-5-restructuration-du-projet)
+- [Étape 6: Migration des fonctionnalités](#étape-6-migration-des-fonctionnalités)
+- [Étape 7: Conversion progressive à TypeScript](#étape-7-conversion-progressive-à-typescript)
+- [Étape 8: Tests et déploiement](#étape-8-tests-et-déploiement)
 - [Ressources utiles](#ressources-utiles)
 - [Checklist de migration](#checklist-de-migration)
 
@@ -66,7 +67,75 @@ Lancez le serveur de développement pour générer la configuration automatiquem
 npm run dev
 ```
 
-## Étape 4: Restructuration du projet
+## Étape 4: Installation de Tailwind CSS
+
+### Installation des dépendances
+```bash
+npm install -D tailwindcss postcss autoprefixer
+```
+
+### Initialisation de Tailwind CSS
+```bash
+npx tailwindcss init -p
+```
+
+### Configuration de Tailwind CSS
+Créez ou modifiez le fichier `tailwind.config.js`:
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+### Configuration des styles globaux
+Dans votre fichier `app/globals.css`, ajoutez les directives Tailwind:
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Migration des styles CSS existants
+1. Identifiez les classes CSS personnalisées
+2. Créez des classes utilitaires personnalisées dans `tailwind.config.js`:
+```js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'primary': '#your-color',
+      },
+      spacing: {
+        'custom': 'your-value',
+      },
+    },
+  },
+}
+```
+
+3. Utilisez les classes Tailwind dans vos composants:
+```tsx
+// Avant
+<div className="start-container">
+  <h1 className="start-title">Quizzical</h1>
+</div>
+
+// Après
+<div className="container mx-auto px-4">
+  <h1 className="text-4xl font-bold text-center">Quizzical</h1>
+</div>
+```
+
+## Étape 5: Restructuration du projet
 
 ### Création de la structure de dossiers Next.js
 ```bash
@@ -102,7 +171,7 @@ quizzical/
 └── tsconfig.json
 ```
 
-## Étape 5: Migration des fonctionnalités
+## Étape 6: Migration des fonctionnalités
 
 ### Création du composant racine (_app.tsx)
 ```tsx
@@ -162,7 +231,7 @@ export async function getServerSideProps() {
 }
 ```
 
-## Étape 6: Conversion progressive à TypeScript
+## Étape 7: Conversion progressive à TypeScript
 
 ### Définition des interfaces principales
 ```tsx
@@ -242,7 +311,7 @@ const reducer = (state: QuizState, action: Action): QuizState => {
 };
 ```
 
-## Étape 7: Tests et déploiement
+## Étape 8: Tests et déploiement
 
 ### Tests locaux
 ```bash
@@ -307,6 +376,7 @@ Mettre à jour les scripts de déploiement dans `package.json`:
 ### Installation
 - [ ] Next.js installé
 - [ ] TypeScript installé
+- [ ] Tailwind CSS installé et configuré
 - [ ] package.json mis à jour
 - [ ] tsconfig.json généré
 
@@ -315,6 +385,7 @@ Mettre à jour les scripts de déploiement dans `package.json`:
 - [ ] Dossier `components` créé
 - [ ] Dossier `public` organisé
 - [ ] Dossier `styles` créé
+- [ ] Configuration Tailwind créée
 
 ### Migration des composants
 - [ ] _app.tsx créé
@@ -322,6 +393,7 @@ Mettre à jour les scripts de déploiement dans `package.json`:
 - [ ] Composant Answer migré
 - [ ] Composant Quizz migré
 - [ ] Composant Start migré
+- [ ] Styles CSS convertis en classes Tailwind
 
 ### TypeScript
 - [ ] Interfaces principales définies

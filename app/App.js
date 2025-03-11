@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import Start from "./Start";
-import Quizz from "./Quizz";
+import Start from "./page";
+import Quizz from "../components/Quizz";
 
 function App() {
   //Start usetate helps to know that the game started

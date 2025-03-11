@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://momosa123.github.io/quizzical",
   "dependencies": {
+    "@tailwindcss/postcss": "^4.0.12",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -11,9 +12,11 @@
     "html-entities": "^2.3.3",
     "nanoid": "^3.3.2",
     "next": "^15.2.1",
+    "postcss": "^8.5.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.0",
+    "tailwindcss": "^4.0.12",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
