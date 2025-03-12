@@ -1,5 +1,36 @@
+"use client"
 import {decode} from 'html-entities';
+import { QuizzType } from "@/app/types/quizzType"; 
+import ButtonAnswer from "./ButtonAnswer";
+interface AnswerProps {
+  answer: string;
+  isSelected: boolean;
+  isCorrect: boolean;
+  quizzElement: QuizzType;
+  isEndGame: boolean;
+  setQuizz: (quizz: QuizzType[]) => void
+  quizz: QuizzType[]
+  setSelectedAnswer: (answer: string) => void
+}
 
-export default function Answer({answer}: {answer: string}) {
-  return <button className="text-xl border-2 rounded-xl border-indigo-500 p-2 cursor-pointer hover:bg-indigo-500 hover:text-white" onClick={() => console.log(answer)}>{decode(answer)}</button>;
+export default function Answer({ answer, quizz,  isEndGame, quizzElement, isSelected, isCorrect, setQuizz, setSelectedAnswer}: AnswerProps) {
+
+  function handleClick() {
+    setSelectedAnswer(answer)
+    const quizzWithAnswer = quizz.map(quizz => quizz.id === quizzElement.id ? {...quizz, answer: answer} : quizz)
+    setQuizz(quizzWithAnswer)
+
+}
+  return (
+ <ButtonAnswer 
+ answer={answer} 
+ quizz={quizz} 
+ isEndGame={isEndGame} 
+ quizzElement={quizzElement} 
+ isSelected={isSelected} 
+ isCorrect={isCorrect} 
+ setQuizz={setQuizz} 
+ setSelectedAnswer={setSelectedAnswer}
+ />
+  );
 }

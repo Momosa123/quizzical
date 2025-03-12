@@ -1,0 +1,3 @@
+#This is a set of technical question for my personal understanding
+Why ype over interface ? cf watch video of ...
+Is the naming of types correct, maybe invert the name of quesitonType and QuizzType 
